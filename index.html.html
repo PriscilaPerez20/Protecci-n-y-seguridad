@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Protección y Seguridad</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #091322;
+            color: #f8fafc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 24px;
+        }
+        .main-card {
+            width: 100%;
+            max-width: 960px;
+            background-color: #112238;
+            padding: 36px 40px;
+            border-radius: 14px;
+            box-shadow: 0 14px 35px rgba(0, 0, 0, 0.65);
+            border: 1px solid #1e3a5f;
+        }
+        h1 {
+            color: #38bdf8;
+            font-size: 2.1rem;
+            text-align: center;
+            margin-bottom: 8px;
+        }
+        h2 {
+            color: #38bdf8;
+            font-size: 1.65rem;
+            text-align: center;
+            margin-bottom: 24px;
+        }
+        .subtitle {
+            text-align: center;
+            color: #cbd5e1;
+            font-size: 1.05rem;
+            margin-bottom: 22px;
+        }
+        .slide {
+            display: none;
+        }
+        .slide.active {
+            display: block;
+        }
+        .menu-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .menu-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        .btn-full {
+            background-color: #0891b2;
+            color: #ffffff;
+            border: 1px solid #22d3ee;
+            padding: 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.05rem;
+            font-weight: 600;
+            text-align: center;
+            transition: all 0.25s ease;
+        }
+        .btn-full:hover {
+            background-color: #22d3ee;
+            color: #091322;
+        }
+        .btn-tema {
+            background-color: #1b314d;
+            color: #f8fafc;
+            border: 1px solid #2c4c75;
+            padding: 16px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            text-align: left;
+            transition: all 0.25s ease;
+        }
+        .btn-tema:hover {
+            background-color: #38bdf8;
+            color: #091322;
+            font-weight: 600;
+        }
+        .btn-wide {
+            grid-column: 1 / -1;
+            text-align: center;
+        }
+        .info-box {
+            background-color: #162a44;
+            border: 1px solid #254369;
+            border-left: 4px solid #22d3ee;
+            border-radius: 8px;
+            padding: 18px 22px;
+            margin-bottom: 16px;
+        }
+        .info-box h3 {
+            color: #38bdf8;
+            font-size: 1.15rem;
+            margin-bottom: 10px;
+        }
+        .info-box p, .info-box li {
+            color: #e2e8f0;
+            font-size: 1rem;
+            line-height: 1.65;
+            margin-bottom: 8px;
+        }
+        .info-box p:last-child, .info-box li:last-child {
+            margin-bottom: 0;
+        }
+        .info-box ul {
+            padding-left: 22px;
+            margin-top: 6px;
+        }
+        .img-card {
+            background-color: #0e1d30;
+            border: 1px solid #254369;
+            border-radius: 8px;
+            padding: 14px;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+        .img-card img {
+            max-width: 100%;
+            max-height: 240px;
+            border-radius: 6px;
+            display: block;
+            margin: 0 auto 8px auto;
+        }
+        .img-card svg {
+            width: 100%;
+            max-width: 520px;
+            height: 150px;
+            display: block;
+            margin: 0 auto 8px auto;
+        }
+        .img-caption {
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+        code {
+            background-color: #091322;
+            color: #38bdf8;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: Consolas, monospace;
+        }
+        .btn-regresar {
+            background-color: #e06c75;
+            color: #ffffff;
+            border: none;
+            padding: 11px 22px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 14px;
+            font-size: 0.98rem;
+            font-weight: 600;
+            transition: background-color 0.25s ease;
+            display: inline-block;
+        }
+        .btn-regresar:hover {
+            background-color: #c9555f;
+        }
+        @media (max-width: 650px) {
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+            .btn-wide {
+                grid-column: auto;
+            }
+            .main-card {
+                padding: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main-card">
+
+        <!-- MENÚ PRINCIPAL -->
+        <div id="menu" class="slide active">
+            <h1>Protección y Seguridad</h1>
+            <p class="subtitle">Selecciona una sección para ver su información:</p>
+
+            <div class="menu-stack">
+                <button class="btn-full" onclick="mostrarSlide('equipo')">Equipo</button>
+
+                <div class="menu-grid">
+                    <button class="btn-tema" onclick="mostrarSlide('t1')">6.1. Concepto y objetivos</button>
+                    <button class="btn-tema" onclick="mostrarSlide('t2')">6.2. Clasificación aplicada</button>
+                    <button class="btn-tema" onclick="mostrarSlide('t3')">6.3. Funciones de protección</button>
+                    <button class="btn-tema" onclick="mostrarSlide('t4')">6.4. Matrices de acceso</button>
+                    <button class="btn-tema" onclick="mostrarSlide('t5')">6.5. Protección basada en lenguaje</button>
+                    <button class="btn-tema" onclick="mostrarSlide('t6')">6.6. Validación y amenazas</button>
+                    <button class="btn-tema btn-wide" onclick="mostrarSlide('t7')">6.7. Cifrado</button>
+                </div>
+
+                <button class="btn-full" onclick="mostrarSlide('bibliografias')">Bibliografías</button>
+            </div>
+        </div>
+
+        <!-- EQUIPO -->
+        <div id="equipo" class="slide">
+            <h2>Equipo</h2>
+            <div class="info-box">
+                <p><strong>Materia:</strong> Sistemas Operativos</p>
+                <p><strong>Tema:</strong> Protección y Seguridad</p>
+                <p><strong>Docente:</strong> Myrna Villegas Gaytán</p>
+                <p><strong>Integrantes:</strong></p>
+                <ul>
+                    <li>Brissel Alejandra Baca Garcia</li>
+                    <li>Priscila Guadalupe Pérez Peña</li>
+                    <li>Osmar Rene Navarro Duran</li>
+                </ul>
+                <p style="margin-top: 10px;"><strong>Números de control:</strong> 25410143 &bull; 25410169 &bull; 25410584</p>
+            </div>
+            <button class="btn-regresar" onclick="mostrarSlide('menu')">← Volver</button>
+        </div>
+
+        <!-- 6.1 -->
+        <div id="t1" class="slide">
+            <h2>6.1. Concepto y objetivos de protección y seguridad</h2>
+
+            <div class="img-card">
+                <img src="img/6-1.png" alt="Concepto y objetivos de protección y seguridad" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                <svg style="display:none;" viewBox="0 0 520 150">
+                    <rect x="20" y="25" width="140" height="100" rx="10" fill="#162a44" stroke="#22d3ee" stroke-width="2"/>
+                    <text x="90" y="68" fill="#38bdf8" font-size="14" font-weight="bold" text-anchor="middle">Confidencialidad</text>
+                    <text x="90" y="92" fill="#cbd5e1" font-size="11" text-anchor="middle">Solo autorizados</text>
+
+                    <rect x="190" y="25" width="140" height="100" rx="10" fill="#162a44" stroke="#22d3ee" stroke-width="2"/>
+                    <text x="260" y="68" fill="#38bdf8" font-size="14" font-weight="bold" text-anchor="middle">Integridad</text>
+                    <text x="260" y="92" fill="#cbd5e1" font-size="11" text-anchor="middle">Sin alteraciones</text>
+
+                    <rect x="360" y="25" width="140" height="100" rx="10" fill="#162a44" stroke="#22d3ee" stroke-width="2"/>
+                    <text x="430" y="68" fill="#38bdf8" font-size="14" font-weight="bold" text-anchor="middle">Disponibilidad</text>
+                    <text x="430" y="92" fill="#cbd5e1" font-size="11" text-anchor="middle">Acceso oportuno</text>
+                </svg>
+                <p class="img-caption">Tríada CID y control interno de recursos</p>
+            </div>
+
+            <div class="info-box">
+                <h3>¿Qué es la Protección?</h3>
+                <p>Es el mecanismo interno del sistema operativo encargado de regular y controlar qué programas, procesos o usuarios pueden acceder a los recursos del sistema (archivos, memoria, CPU, puertos, dispositivos de E/S). Su enfoque principal es establecer y hacer cumplir las reglas de acceso de manera confiable y eficiente, evitando que un proceso interfiera accidental o intencionalmente con otro o con el núcleo del sistema.</p>
+                <p>En una computadora multiusuario o multitarea, la protección garantiza que cada programa opere dentro de los límites asignados y que los recursos compartidos se utilicen de forma ordenada.</p>
+                <p>A nivel arquitectónico, la protección actúa como un filtro constante entre las solicitudes de los procesos y las estructuras críticas del sistema. Por ejemplo, si una aplicación intenta escribir en una dirección de memoria que pertenece a otro programa o modificar un archivo del sistema sin permiso, el mecanismo de protección intercepta la operación y la bloquea antes de que cause un fallo o una corrupción de datos.</p>
+                <p>Asimismo, la protección distingue entre la <em>intención</em> de un programa y su <em>capacidad real</em> de ejecutar una acción: un programa puede solicitar leer un archivo o comunicarse con un dispositivo, pero solo podrá hacerlo si su contexto de ejecución posee los derechos o privilegios correspondientes.</p>
+            </div>
+
+            <div class="info-box">
+                <h3>¿Qué es la Seguridad?</h3>
+                <p>Es el conjunto de medidas, políticas, controles y técnicas destinadas a proteger al sistema y a sus datos contra amenazas internas y externas, tales como accesos no autorizados, robo o fuga de información, alteración maliciosa, suplantación de identidad, denegación de servicio o destrucción de recursos.</p>
+                <p>Mientras que la protección se centra principalmente en los mecanismos internos de control de acceso, la seguridad tiene un alcance más amplio que considera el riesgo, las amenazas, las vulnerabilidades y la confianza de los usuarios y redes.</p>
+                <p>En el contexto de los sistemas operativos y las infraestructuras informáticas, la seguridad abarca desde la configuración inicial del equipo, el manejo de cuentas y credenciales, y la administración de parches, hasta las políticas organizacionales, la respuesta ante incidentes y la recuperación de información tras un evento adverso.</p>
+                <p>También considera el factor humano y el entorno externo: aunque el núcleo del sistema operativo proteja la memoria y los archivos, una contraseña débil, un servicio mal configurado o un correo engañoso pueden comprometer el sistema si no existen controles de seguridad adecuados.</p>
+            </div>
+
+            <div class="info-box">
+                <h3>Objetivos principales (Tríada CID y pilares complementarios)</h3>
+                <ul>
+                    <li><strong>Confidencialidad:</strong> Asegurar que la información sensible o privada solo sea revelada o leída por entidades (usuarios, procesos o servicios) debidamente autorizadas, evitando fugas o interceptaciones. Se apoya en permisos de lectura, control de sesiones, segmentación de datos y cifrado.</li>
+                    <li><strong>Integridad:</strong> Garantizar que los datos, archivos y configuraciones del sistema no sean modificados, alterados o borrados sin autorización, manteniendo su exactitud, validez y coherencia. Protege tanto contra modificaciones maliciosas como contra alteraciones accidentales o fallos de hardware/software.</li>
+                    <li><strong>Disponibilidad:</strong> Asegurar que los recursos, aplicaciones y datos del sistema operativo estén accesibles y operativos para los usuarios legítimos cuando se requieran, resistiendo fallos o ataques de saturación. Implica redundancia, planificación adecuada de recursos, prevención de bloqueos y respaldos.</li>
+                    <li><strong>Autenticación y control de acceso:</strong> Verificar de forma confiable la identidad de quien solicita acceso al sistema (mediante algo que sabe, algo que tiene o algo que es) y comprobar que cuente con los permisos correspondientes antes de conceder el recurso.</li>
+                    <li><strong>Auditoría y no repudio:</strong> Registrar eventos relevantes (inicios de sesión, accesos a archivos, cambios de permisos, ejecuciones privilegiadas) en bitácoras protegidas para rastrear actividades, investigar incidentes y evitar que un emisor o usuario niegue haber realizado una acción.</li>
+                    <li><strong>Rendición de cuentas (Accountability):</strong> Vincular cada acción o modificación relevante con una identidad verificada para que exista trazabilidad clara sobre quién o qué proceso realizó un cambio en el sistema.</li>
+                </ul>
+            </div>
+
+            <div class="info-box">
+                <h3>Principios de diseño en protección y seguridad</h3>
+                <ul>
+                    <li><strong>Principio de menor privilegio:</strong> Cada usuario o proceso debe tener únicamente los permisos estrictamente necesarios para cumplir su función, y nada más. Si un proceso se ve comprometido, el daño queda acotado a lo que ese proceso podía hacer.</li>
+                    <li><strong>Defensa en profundidad:</strong> Combinar múltiples capas de control (físicas, de red, de sistema operativo, de aplicación y de datos) para que, si falla una medida o se descubre una vulnerabilidad en un nivel, existan otras capas de respaldo.</li>
+                    <li><strong>Separación de responsabilidades:</strong> Dividir tareas críticas entre distintos roles o procesos (por ejemplo, separar quien solicita un cambio de quien lo aprueba o audita) para evitar abusos o errores graves por parte de un solo actor.</li>
+                    <li><strong>Diseño por defecto seguro (Fail-safe defaults):</strong> Configurar el sistema de modo que, ante la duda, un error o la falta de una regla explícita, el acceso se deniegue por defecto en lugar de permitirse automáticamente.</li>
+                    <li><strong>Economía del mecanismo:</strong> Mantener los mecanismos de protección y seguridad tan simples, claros y modulares como sea posible, ya que los diseños complejos son más difíciles de auditar, probar y mantener libres de fallos.</li>
+                </ul>
+            </div>
+
+            <button class="btn-regresar" onclick="mostrarSlide('menu')">← Volver</button>
+        </div>
+
+        <!-- 6.2 -->
+        <div id="t2" class="slide">
+            <h2>6.2. Clasificación aplicada a la seguridad</h2>
+
+            <div class="img-card">
+                <img src="img/6-2.png" alt="Clasificación aplicada a la seguridad" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                <svg style="display:none;" viewBox="0 0 520 150">
+                    <rect x="25" y="30" width="145" height="90" rx="10" fill="#162a44" stroke="#22d3ee" stroke-width="2"/>
+                    <text x="97" y="70" fill="#38bdf8" font-size="13" font-weight="bold" text-anchor="middle">Seguridad Física</text>
+                    <text x="97" y="92" fill="#cbd5e1" font-size="11" text-anchor="middle">Equipos e instalaciones</text>
+
+                    <rect x="187" y="30" width="145" height="90" rx="10" fill="#162a44" stroke="#22d3ee" stroke-width="2"/>
+                    <text x="260" y="70" fill="#38bdf8" font-size="13" font-weight="bold" text-anchor="middle">Seguridad Lógica</text>
+                    <text x="260" y="92" fill="#cbd5e1" font-size="11" text-anchor="middle">SO, cuentas y apps</text>
+
+                    <rect x="350" y="30" width="145" height="90" rx="10" fill="#162a44" stroke="#22d3ee" stroke-width="2"/>
+                    <text x="422" y="70" fill="#38bdf8" font-size="13" font-weight="bold" text-anchor="middle">Seguridad de Red</text>
+                    <text x="422" y="92" fill="#cbd5e1" font-size="11" text-anchor="middle">Tráfico y conexiones</text>
+                </svg>
+                <p class="img-caption">Capas de seguridad física, lógica y de red</p>
+            </div>
+
+            <div class="info-box">
+                <h3>Seguridad física y ambiental</h3>
+                <p>Protege el hardware, servidores, centros de datos, cableado, estaciones de trabajo y dispositivos portátiles frente a accesos físicos no autorizados, robos, sabotaje, vandalismo, fallos eléctricos o desastres naturales (incendios, inundaciones, sismos, humedad o variaciones de temperatura).</p>
+                <p>De nada sirve contar con configuraciones lógicas robustas si un atacante puede acceder directamente a la consola física del servidor, retirar discos duros, conectar unidades no autorizadas o provocar un corte de energía sin respaldo.</p>
+                <ul>
+                    <li><strong>Controles de acceso físico:</strong> Cerraduras, tarjetas inteligentes, biometría, torniquetes, bitácoras de visitantes, cámaras de videovigilancia y supervisión en áreas críticas.</li>
+                    <li><strong>Controles ambientales y eléctricos:</strong> Sistemas de alimentación ininterrumpida (UPS), generadores eléctricos, supresores de picos, aire acondicionado de precisión, sensores de humo/temperatura y sistemas de extinción adecuados para equipos electrónicos.</li>
+                    <li><strong>Protección de dispositivos móviles y portátiles:</strong> Bloqueo automático de pantalla, cifrado de disco completo y control de puertos USB o medios extraíbles.</li>
+                </ul>
+            </div>
+
+            <div class="info-box">
+                <h3>Seguridad lógica, de sistema operativo y de aplicaciones</h3>
+                <p>Controla el acceso a cuentas, archivos, memoria, procesos y servicios mediante autenticación (contraseñas, MFA, certificados), autorización por roles o permisos, actualizaciones/parches, configuraciones seguras y validación de entradas en las aplicaciones.</p>
+                <p>En el sistema operativo, incluye el endurecimiento (<em>hardening</em>) del sistema, la desactivación de servicios innecesarios, la gestión de privilegios de usuario y administrador, el control de permisos en sistemas de archivos y el aislamiento entre procesos.</p>
+                <ul>
+                    <li><strong>Gestión de identidades y accesos (IAM):</strong> Definición de cuentas, grupos, roles, políticas de contraseñas, autenticación multifactor (MFA) y cierre de sesiones inactivas.</li>
+                    <li><strong>Seguridad en aplicaciones y web:</strong> Protege el código y la lógica de negocio contra fallos como inyecciones, manejo inseguro de sesiones, exposición de datos sensibles, control de acceso roto o configuraciones deficientes.</li>
+                    <li><strong>Administración de vulnerabilidades y parches:</strong> Aplicación periódica de actualizaciones del sistema operativo, controladores y software para corregir fallos conocidos antes de que sean explotados.</li>
+                </ul>
+            </div>
+
+            <div class="info-box">
+                <h3>Seguridad de red y operativa</h3>
+                <ul>
+                    <li><strong>Seguridad de red:</strong> Resguarda la transmisión y el tráfico de datos mediante firewalls, redes privadas virtuales (VPN), segmentación de redes (VLAN, subredes o zonas desmilitarizadas DMZ), cifrado en tránsito (TLS/HTTPS, SSH) y sistemas de detección o prevención de intrusos (IDS/IPS).</li>
+                    <li><strong>Seguridad de la información y datos:</strong> Protege los datos en reposo (almacenados en discos, bases de datos o respaldos), en tránsito (viajando por redes) y en uso (procesados en memoria), mediante clasificación de sensibilidad, cifrado y control de copias.</li>
+                    <li><strong>Seguridad operativa y humana:</strong> Incluye respaldos periódicos (y pruebas periódicas de restauración), planes de continuidad de negocio y recuperación ante desastres (BCP/DRP), procedimientos operativos estándar y capacitación continua para reducir errores humanos e ingeniería social.</li>
+                </ul>
+            </div>
+
+            <button class="btn-regresar" onclick="mostrarSlide('menu')">← Volver</button>
+        </div>
+
+        <!-- 6.3 -->
+        <div id="t3" class="slide">
+            <h2>6.3. Funciones del sistema de protección</h2>
+
+            <div class="img-card">
+                <img src="img/6-3.png" alt="Funciones del sistema de protección" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                <svg style="display:none;" viewBox="0 0 520 150">
+                    <rect x="30" y="35" width="120" height="80" rx="8" fill="#162a44" stroke="#22d3ee" stroke-width="2"/>
+                    <text x="90" y="72" fill="#38bdf8" font-size="13" font-weight="bold" text-anchor="middle">Proceso / Sujeto</text>
+                    <text x="90" y="92" fill="#cbd5e1" font-size="11" text-anchor="middle">Solicita acceso</text>
+
+                    <line x1="150" y1="75" x2="195" y2="75" stroke="#22d3ee" stroke-width="2"/>
+                    <rect x="195" y="30" width="130" height="90" rx="8" fill="#0891b2" stroke="#22d3ee" stroke-width="2"/>
+                    <text x="260" y="72" fill="#ffffff" font-size="13" font-weight="bold" text-anchor="middle">Protección SO</text>
+                    <text x="260" y="92" fill="#e2e8f0" font-size="11" text-anchor="middle">Verifica dominio</text>
+
+                    <line x1="325" y1="75" x2="370" y2="75" stroke="#22d3ee" stroke-width="2"/>
+                    <rect x="370" y="35" width="120" height="80" rx="8" fill="#162a44" stroke="#22d3ee" stroke-width="2"/>
+                    <text x="430" y="72" fill="#38bdf8" font-size="13" font-weight="bold" text-anchor="middle">Recurso / Objeto</text>
+                    <text x="430" y="92" fill="#cbd5e1" font-size="11" text-anchor="middle">Archivo / Memoria</text>
+                </svg>
+                <p class="img-caption">Mediación entre sujetos, dominios de protección y recursos</p>
+            </div>
+
+            <div class="info-box">
+                <h3>Control de acceso y separación de política y mecanismo</h3>
+                <p>Define qué operaciones (lectura, escritura, ejecución, creación, modificación de permisos o eliminación) puede realizar un sujeto sobre cada recurso del sistema. Separar las <em>políticas</em> (qué se debe permitir o prohibir) de los <em>mecanismos</em> (cómo se aplica técnicamente) permite cambiar reglas de seguridad sin reescribir todo el código de bajo nivel.</p>
+                <p>Asimismo, el sistema de protección debe supervisar cada solicitud de acceso, aplicar la verificación de forma consistente y mantener un rendimiento adecuado sin volver lento el sistema.</p>
+                <p>Un buen diseño de protección ofrece flexibilidad: el mismo mecanismo del sistema operativo puede soportar políticas distintas según el entorno (por ejemplo, una estación de trabajo personal frente a un servidor multiusuario o un entorno académico).</p>
+            </div>
+
+            <div class="info-box">
+                <h3>Dominios de protección, modo dual y aislamiento de procesos</h3>
+                <ul>
+                    <li><strong>Dominios de protección:</strong> Agrupan pares <code>(objeto, derechos)</code> que determinan los recursos accesibles para un proceso en un momento dado. Un proceso puede cambiar de dominio bajo reglas controladas (por ejemplo, al invocar una llamada al sistema, ejecutar un programa con privilegios definidos o interactuar con un servicio autorizado).</li>
+                    <li><strong>Modo usuario y modo núcleo (kernel):</strong> El hardware y el sistema operativo separan la ejecución privilegiada del núcleo (donde se ejecutan instrucciones sensibles, gestión de hardware y tablas de control) de la ejecución restringida de las aplicaciones de usuario para impedir manipulaciones directas sobre dispositivos o estructuras críticas.</li>
+                    <li><strong>Aislamiento y protección de memoria:</strong> Mediante registros base/límite, paginación y bits de permisos (lectura, escritura, ejecución como NX/DEP), evita que un proceso con errores o malintencionado lea o altere el espacio de direcciones de otros procesos o comprometa la estabilidad del sistema operativo.</li>
+                    <li><strong>Control de acceso a archivos y dispositivos:</strong> Verifica permisos antes de abrir, leer, escribir o ejecutar archivos, directorios o periféricos, asegurando que los recursos compartidos se utilicen respetando su propiedad y reglas asignadas.</li>
+                </ul>
+            </div>
+
+            <button class="btn-regresar" onclick="mostrarSlide('menu')">← Volver</button>
+        </div>
+
+        <!-- 6.4 -->
+        <div id="t4" class="slide">
+            <h2>6.4. Implantación de matrices de acceso</h2>
+
+            <div class="img-card">
+                <img src="img/6-4.png" alt="Implantación de matrices de acceso" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                <svg style="display:none;" viewBox="0 0 520 150">
+                    <rect x="60" y="20" width="400" height="110" rx="8" fill="#162a44" stroke="#22d3ee" stroke-width="2"/>
+                    <line x1="180" y1="20" x2="180" y2="130" stroke="#254369" stroke-width="2"/>
+                    <line x1="320" y1="20" x2="320" y2="130" stroke="#254369" stroke-width="2"/>
+                    <line x1="60" y1="56" x2="460" y2="56" stroke="#254369" stroke-width="2"/>
+                    <line x1="60" y1="93" x2="460" y2="93" stroke="#254369" stroke-width="2"/>
+                    <text x="120" y="43" fill="#38bdf8" font-size="12" font-weight="bold" text-anchor="middle">Sujetos \ Objetos</text>
+                    <text x="250" y="43" fill="#38bdf8" font-size="12" font-weight="bold" text-anchor="middle">Archivo A</text>
+                    <text x="390" y="43" fill="#38bdf8" font-size="12" font-weight="bold" text-anchor="middle">Impresora</text>
+                    <text x="120" y="79" fill="#e2e8f0" font-size="12" text-anchor="middle">Usuario 1</text>
+                    <text x="250" y="79" fill="#22d3ee" font-size="12" text-anchor="middle">Leer / Escribir</text>
+                    <text x="390" y="79" fill="#cbd5e1" font-size="12" text-anchor="middle">Imprimir</text>
+                    <text x="120" y="116" fill="#e2e8f0" font-size="12" text-anchor="middle">Invitado</text>
+                    <text x="250" y="116" fill="#cbd5e1" font-size="12" text-anchor="middle">Leer</text>
+                    <text x="390" y="116" fill="#94a3b8" font-size="12" text-anchor="middle">---</text>
+                </svg>
+                <p class="img-caption">Relación de sujetos, objetos y derechos de acceso</p>
+            </div>
+
+            <div class="info-box">
+                <h3>Modelo de matriz de acceso</h3>
+                <p>Representa el control de acceso como una tabla conceptual donde las <em>filas</em> son los dominios o sujetos (usuarios, procesos, roles) y las <em>columnas</em> son los objetos (archivos, directorios, memoria, impresoras, puertos), indicando en cada celda los <em>derechos de acceso</em> permitidos (como lectura, escritura, ejecución o cambio de dominio).</p>
+                <p>En la práctica, una matriz completa suele ser muy grande y dispersa (muchas celdas vacías), por lo que los sistemas operativos utilizan distintas estructuras para implementarla de forma eficiente.</p>
+                <p>Además de los permisos básicos sobre datos o dispositivos, la matriz puede incluir derechos administrativos sobre la propia estructura, como la capacidad de copiar un derecho, transferirlo o revocarlo, así como derechos de entrada para cambiar de dominio de protección.</p>
+            </div>
+
+            <div class="info-box">
+                <h3>Formas de implantación en sistemas reales</h3>
+                <ul>
+                    <li><strong>Listas de Control de Acceso (ACL):</strong> Se organizan por objeto (columna), guardando para cada recurso la lista de sujetos autorizados y sus permisos. Facilitan responder rápidamente quién puede acceder a un archivo o recurso específico y revocar accesos sobre ese objeto, aunque revisar todos los permisos de un usuario sobre todo el sistema requiere recorrer distintos objetos.</li>
+                    <li><strong>Listas de capacidades (Capability lists):</strong> Se organizan por dominio o sujeto (fila), indicando qué objetos puede manipular cada uno y con qué derechos. Cada capacidad actúa como una credencial o "llave" protegida que autoriza el acceso al recurso referenciado; facilitan saber qué puede hacer un proceso, pero revocar un acceso globalmente sobre un objeto puede exigir revisar o invalidar capacidades emitidas.</li>
+                    <li><strong>Tabla global:</strong> Almacena directamente las entradas o tuplas <code>(dominio, objeto, derechos)</code> en una estructura central; es conceptualmente sencilla y directa de consultar, pero puede volverse costosa en memoria y tiempo de búsqueda cuando hay muchos sujetos y objetos.</li>
+                    <li><strong>Llaves y candados (Keys and locks):</strong> Asocia identificadores o claves a los sujetos y candados/patrones a los objetos, de modo que el acceso se concede cuando la clave del sujeto coincide con el candado del objeto; es un enfoque híbrido que combina ideas de ambos lados de la matriz.</li>
+                </ul>
+            </div>
+
+            <button class="btn-regresar" onclick="mostrarSlide('menu')">← Volver</button>
+        </div>
+
+        <!-- 6.5 -->
+        <div id="t5" class="slide">
+            <h2>6.5. Protección basada en el lenguaje</h2>
+
+            <div class="img-card">
+                <img src="img/6-5.png" alt="Protección basada en el lenguaje" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                <svg style="display:none;" viewBox="0 0 520 150">
+                    <rect x="40" y="25" width="440" height="100" rx="10" fill="#162a44" stroke="#22d3ee" stroke-width="2"/>
+                    <text x="260" y="55" fill="#38bdf8" font-size="14" font-weight="bold" text-anchor="middle">Control desde el Código Fuente</text>
+                    <text x="260" y="80" fill="#e2e8f0" font-size="12" text-anchor="middle">private / protected / internal / public</text>
+                    <text x="260" y="103" fill="#cbd5e1" font-size="11" text-anchor="middle">Tipado seguro y verificación en compilación / ejecución</text>
+                </svg>
+                <p class="img-caption">Encapsulamiento y reglas de acceso en el lenguaje</p>
+            </div>
+
+            <div class="info-box">
+                <h3>Encapsulamiento y control de visibilidad</h3>
+                <p>Los lenguajes de programación modernos permiten especificar directamente en el código fuente qué módulos, clases o componentes pueden acceder a ciertos datos, atributos o métodos mediante modificadores de visibilidad como <code>private</code>, <code>protected</code>, <code>internal</code> y <code>public</code>.</p>
+                <p>De este modo, la estructura interna de un componente queda oculta y cualquier modificación debe pasar por métodos o propiedades controladas que validen el estado del objeto.</p>
+                <p>Esta forma de protección complementa los mecanismos del sistema operativo porque opera dentro de los programas y aplicaciones, previniendo usos indebidos de variables, estructuras internas o funciones sensibles incluso antes de que ocurra un error en ejecución.</p>
+            </div>
+
+            <div class="info-box">
+                <h3>Verificación en compilación y ejecución</h3>
+                <ul>
+                    <li><strong>Tipado seguro y control de límites:</strong> Ayuda a prevenir conversiones de tipo inválidas, accesos fuera de rango en arreglos y desbordamientos de búfer, reduciendo errores que pueden convertirse en fallos de seguridad o bloqueos del programa.</li>
+                    <li><strong>Comprobación en compilación y tiempo de ejecución:</strong> Permite detectar inconsistencias de tipos, firmas incorrectas o accesos prohibidos antes de ejecutar el programa, y validar condiciones, excepciones o permisos dinámicos durante su ejecución.</li>
+                    <li><strong>Entornos administrados y sandboxing:</strong> Algunos entornos verifican la validez del código antes de ejecutarlo, gestionan automáticamente la memoria (reduciendo fugas o punteros colgantes) y limitan las operaciones permitidas a un código para contener posibles comportamientos no deseados.</li>
+                    <li><strong>Ventaja de portabilidad y granularidad:</strong> Al expresar las restricciones en el propio lenguaje, es posible aplicar reglas finas sobre objetos o módulos sin depender únicamente de cambios de dominio pesados a nivel de hardware o sistema operativo.</li>
+                </ul>
+            </div>
+
+            <button class="btn-regresar" onclick="mostrarSlide('menu')">← Volver</button>
+        </div>
+
+        <!-- 6.6 -->
+        <div id="t6" class="slide">
+            <h2>6.6. Validación y amenazas al sistema</h2>
+
+            <div class="img-card">
+                <img src="img/6-6.png" alt="Validación y amenazas al sistema" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                <svg style="display:none;" viewBox="0 0 520 150">
+                    <rect x="30" y="35" width="130" height="80" rx="8" fill="#162a44" stroke="#e06c75" stroke-width="2"/>
+                    <text x="95" y="72" fill="#e06c75" font-size="13" font-weight="bold" text-anchor="middle">Entrada / Amenaza</text>
+                    <text x="95" y="92" fill="#cbd5e1" font-size="11" text-anchor="middle">Malware / SQLi / DoS</text>
+
+                    <line x1="160" y1="75" x2="200" y2="75" stroke="#22d3ee" stroke-width="2"/>
+                    <rect x="200" y="30" width="120" height="90" rx="8" fill="#0891b2" stroke="#22d3ee" stroke-width="2"/>
+                    <text x="260" y="72" fill="#ffffff" font-size="13" font-weight="bold" text-anchor="middle">Validación</text>
+                    <text x="260" y="92" fill="#e2e8f0" font-size="11" text-anchor="middle">Filtro y saneamiento</text>
+
+                    <line x1="320" y1="75" x2="360" y2="75" stroke="#22d3ee" stroke-width="2"/>
+                    <rect x="360" y="35" width="130" height="80" rx="8" fill="#162a44" stroke="#22d3ee" stroke-width="2"/>
+                    <text x="425" y="72" fill="#38bdf8" font-size="13" font-weight="bold" text-anchor="middle">Sistema Seguro</text>
+                    <text x="425" y="92" fill="#cbd5e1" font-size="11" text-anchor="middle">Datos confiables</text>
+                </svg>
+                <p class="img-caption">Validación de entradas frente a amenazas del sistema</p>
+            </div>
+
+            <div class="info-box">
+                <h3>Amenazas comunes a sistemas y aplicaciones</h3>
+                <ul>
+                    <li><strong>Malware:</strong> Programas maliciosos como virus, gusanos, troyanos, spyware, keyloggers, rootkits y ransomware diseñados para alterar el funcionamiento, propagarse, espiar actividades, robar información, ocultarse o cifrar archivos exigiendo rescate.</li>
+                    <li><strong>Desbordamiento de búfer y corrupción de memoria:</strong> Ocurren cuando se escribe más información de la capacidad asignada a un búfer o se manipulan punteros de forma insegura, pudiendo sobrescribir datos adyacentes, alterar direcciones de retorno o permitir la ejecución de código no autorizado.</li>
+                    <li><strong>Inyecciones y vulnerabilidades web:</strong> Ataques como inyección SQL (SQLi), inyección de comandos del sistema, traversal de rutas o Cross-Site Scripting (XSS) provocados cuando datos suministrados por el usuario se interpretan como consultas, comandos o scripts ejecutables en lugar de simples datos.</li>
+                    <li><strong>Escalada de privilegios y suplantación:</strong> Intentos de obtener mayores permisos de los asignados (vertical u horizontal) o hacerse pasar por un usuario, proceso o servicio legítimo mediante credenciales comprometidas, sesiones expuestas o fallos de autorización.</li>
+                    <li><strong>Denegación de servicio (DoS / DDoS) e ingeniería social:</strong> Saturación intencional de ancho de banda, conexiones, CPU o memoria para interrumpir o degradar el servicio a usuarios legítimos, o técnicas de engaño (como phishing, pretexting, suplantación o enlaces maliciosos) para obtener credenciales o instalar software.</li>
+                </ul>
+            </div>
+
+            <div class="info-box">
+                <h3>Validación de datos y medidas de defensa</h3>
+                <ul>
+                    <li><strong>Validación y sanitización estricta:</strong> Verificar tipo de dato, formato, longitud, rango numérico y listas permitidas (<em>allowlists</em>) en toda entrada externa (formularios, parámetros, encabezados, APIs o archivos), además de parametrizar consultas o escapar salidas según el contexto.</li>
+                    <li><strong>Principio de menor privilegio y segmentación:</strong> Ejecutar servicios y procesos con los mínimos privilegios necesarios y separar entornos o redes para limitar el impacto y la propagación de un compromiso.</li>
+                    <li><strong>Actualizaciones, monitoreo y respaldos:</strong> Instalar parches de seguridad oportunamente, revisar registros (logs) y alertas para detectar anomalías y mantener respaldos actualizados y probados.</li>
+                </ul>
+            </div>
+
+            <button class="btn-regresar" onclick="mostrarSlide('menu')">← Volver</button>
+        </div>
+
+        <!-- 6.7 -->
+        <div id="t7" class="slide">
+            <h2>6.7. Cifrado</h2>
+
+            <div class="img-card">
+                <img src="img/6-7.png" alt="Cifrado y criptografía" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                <svg style="display:none;" viewBox="0 0 520 150">
+                    <rect x="25" y="35" width="125" height="80" rx="8" fill="#162a44" stroke="#22d3ee" stroke-width="2"/>
+                    <text x="87" y="72" fill="#38bdf8" font-size="13" font-weight="bold" text-anchor="middle">Texto Plano</text>
+                    <text x="87" y="92" fill="#cbd5e1" font-size="11" text-anchor="middle">Dato legible</text>
+
+                    <line x1="150" y1="75" x2="190" y2="75" stroke="#22d3ee" stroke-width="2"/>
+                    <rect x="190" y="30" width="140" height="90" rx="8" fill="#0891b2" stroke="#22d3ee" stroke-width="2"/>
+                    <text x="260" y="72" fill="#ffffff" font-size="13" font-weight="bold" text-anchor="middle">Algoritmo + Clave</text>
+                    <text x="260" y="92" fill="#e2e8f0" font-size="11" text-anchor="middle">Simétrico / Asimétrico</text>
+
+                    <line x1="330" y1="75" x2="370" y2="75" stroke="#22d3ee" stroke-width="2"/>
+                    <rect x="370" y="35" width="125" height="80" rx="8" fill="#162a44" stroke="#22d3ee" stroke-width="2"/>
+                    <text x="432" y="72" fill="#38bdf8" font-size="13" font-weight="bold" text-anchor="middle">Texto Cifrado</text>
+                    <text x="432" y="92" fill="#cbd5e1" font-size="11" text-anchor="middle">Protegido / Hash</text>
+                </svg>
+                <p class="img-caption">Transformación de datos mediante cifrado y funciones hash</p>
+            </div>
+
+            <div class="info-box">
+                <h3>Concepto de cifrado y criptografía</h3>
+                <p>Es el proceso de transformar información legible (<em>texto plano</em>) en una representación codificada e ilegible (<em>texto cifrado</em>) mediante un algoritmo matemático y una o más claves, con el fin de proteger la confidencialidad e integridad de los datos almacenados (<em>en reposo</em>) o transmitidos (<em>en tránsito</em>).</p>
+                <p>La solidez de un sistema de cifrado moderno no depende de mantener oculto el algoritmo, sino de proteger adecuadamente las claves y emplear algoritmos, modos de operación y longitudes de clave vigentes y seguros.</p>
+                <p>En la práctica, el cifrado se aplica en múltiples puntos: cifrado de discos o particiones, archivos sensibles, bases de datos, respaldos y comunicaciones en red (como conexiones seguras en navegadores o túneles VPN).</p>
+            </div>
+
+            <div class="info-box">
+                <h3>Tipos de cifrado y funciones hash</h3>
+                <ul>
+                    <li><strong>Cifrado simétrico:</strong> Utiliza la misma clave secreta tanto para cifrar como para descifrar el mensaje. Destaca por su rapidez y eficiencia con grandes volúmenes de datos (por ejemplo, AES), pero requiere intercambiar o gestionar la clave secreta de forma segura sin que sea interceptada.</li>
+                    <li><strong>Cifrado asimétrico (de clave pública):</strong> Emplea un par de claves matemáticamente relacionadas: una <em>clave pública</em> (que puede distribuirse) y una <em>clave privada</em> (que debe mantenerse secreta). Permite cifrar información, verificar firmas digitales e intercambiar claves de sesión (por ejemplo, RSA o criptografía de curva elíptica, ECC); suele ser más lento que el cifrado simétrico para grandes datos, por lo que en la práctica suelen combinarse (cifrado híbrido).</li>
+                    <li><strong>Funciones hash criptográficas:</strong> Algoritmos deterministas y unidireccionales que transforman una entrada de cualquier tamaño en un resumen o huella de tamaño fijo (por ejemplo, SHA-256 o SHA-3). No están diseñadas para "descifrarse", y se emplean para verificar la integridad de archivos/mensajes y para almacenar contraseñas de forma segura (preferentemente con funciones derivadoras de clave y <em>salt</em>).</li>
+                    <li><strong>Firmas digitales y certificados:</strong> Combinan funciones hash y criptografía asimétrica para comprobar el origen y la integridad de un documento o mensaje, permitiendo que un tercero verifique que fue firmado por el titular de la clave privada correspondiente.</li>
+                </ul>
+            </div>
+
+            <button class="btn-regresar" onclick="mostrarSlide('menu')">← Volver</button>
+        </div>
+
+        <!-- BIBLIOGRAFÍAS -->
+        <div id="bibliografias" class="slide">
+            <h2>Bibliografías</h2>
+            <div class="info-box">
+                <ul>
+                    <li>Silberschatz, A., Galvin, P. B., &amp; Gagne, G. <em>Fundamentos de Sistemas Operativos</em>. McGraw-Hill.</li>
+                    <li>Tanenbaum, A. S., &amp; Bos, H. <em>Sistemas Operativos Modernos</em>. Pearson Educación.</li>
+                    <li>Stallings, W. <em>Criptografía y Seguridad en Redes: Principios y Práctica</em>. Pearson Educación.</li>
+                    <li>OWASP Foundation. <em>OWASP Top Ten: Web Application Security Risks</em>.</li>
+                </ul>
+            </div>
+            <button class="btn-regresar" onclick="mostrarSlide('menu')">← Volver</button>
+        </div>
+
+    </div>
+
+    <script>
+        function mostrarSlide(idSlide) {
+            const slides = document.querySelectorAll('.slide');
+            slides.forEach(slide => slide.classList.remove('active'));
+
+            document.getElementById(idSlide).classList.add('active');
+            window.scrollTo(0, 0);
+        }
+    </script>
+
+</body>
+</html>
